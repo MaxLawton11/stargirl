@@ -1,7 +1,7 @@
 import sqlite3
 import pandas as pd
 # substitute username with your username
-conn = sqlite3.connect('copy_chat.db')
+conn = sqlite3.connect('chat.db')
 # connect to the database
 cur = conn.cursor()
 # get the names of the tables in the database
