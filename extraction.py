@@ -34,11 +34,5 @@ for message, is_from_me, date_uct  in zip(messages['text'], messages['is_from_me
 
     # print message
     if is_from_me == True : # this works beacues 1==True
-        print(""*20, end='')
+        print(" "*20, end='')
     print(message)
-
-
-
-#print(messages.columns.tolist())
-# sends to csv file on desktop
-#messages.iloc[244:600].to_csv('test.csv', index=False, header=False)
