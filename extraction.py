@@ -1,13 +1,11 @@
 import sqlite3
 import pandas as pd
 
-# substitute username with your username
-conn = sqlite3.connect('chat.db')
 # connect to the database
+conn = sqlite3.connect('chat.db')
 cur = conn.cursor()
-# get the names of the tables in the database
-cur.execute(" select name from sqlite_master where type = 'table' ") 
 
+# define command
 SQL_COMMAND = """
 SELECT datetime(message.date/1000000000 + strftime("%s", "2001-01-01"), "unixepoch", "localtime") AS date_uct, id, text, is_from_me
 FROM message
@@ -21,7 +19,7 @@ WHERE id='+16176826385'
 # get messages using the sql
 messages = pd.read_sql_query(SQL_COMMAND, conn)
 
-#limit to last few
+# limit to last few
 messages = messages.drop(index=[i for i in range(len(messages)-100)])
 
 last_message=0
@@ -36,7 +34,7 @@ for message, is_from_me, date_uct  in zip(messages['text'], messages['is_from_me
 
     # print message
     if is_from_me == True : # this works beacues 1==True
-        print(" "*20, end='')
+        print(""*20, end='')
     print(message)
 
 
