@@ -1,59 +1,78 @@
-import random 
-import json 
-import pickle 
-import numpy as np 
-import nltk 
-from keras.models import load_model 
-from nltk.stem import WordNetLemmatizer 
+import tensorflow as tf
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+import numpy as np
+import pandas as pd
+import nltk
+from nltk.tokenize import word_tokenize
+nltk.download('punkt')
 
-lemmatizer = WordNetLemmatizer() 
-intents = json.loads(open("intense.json").read()) 
-words = pickle.load(open('words.pkl', 'rb')) 
-classes = pickle.load(open('classes.pkl', 'rb')) 
-model = load_model('chatbotmodel.h5') 
+# Load your dataset
+data = pd.read_csv('dataset.csv')
 
-def clean_up_sentences(sentence): 
-	sentence_words = nltk.word_tokenize(sentence) 
-	sentence_words = [lemmatizer.lemmatize(word) 
-					for word in sentence_words] 
-	return sentence_words 
+# Tokenize the text data
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts(data['questions'] + data['answers'])
 
-def bagw(sentence): 
-	sentence_words = clean_up_sentences(sentence) 
-	bag = [0]*len(words) 
-	for w in sentence_words: 
-		for i, word in enumerate(words): 
-			if word == w: 
-				bag[i] = 1
-	return np.array(bag) 
+# Convert text to sequences
+input_sequences = tokenizer.texts_to_sequences(data['questions'])
+output_sequences = tokenizer.texts_to_sequences(data['answers'])
 
-def predict_class(sentence): 
-	bow = bagw(sentence) 
-	res = model.predict(np.array([bow]))[0] 
-	ERROR_THRESHOLD = 0.25
-	results = [[i, r] for i, r in enumerate(res) 
-			if r > ERROR_THRESHOLD] 
-	results.sort(key=lambda x: x[1], reverse=True) 
-	return_list = [] 
-	for r in results: 
-		return_list.append({'intent': classes[r[0]], 
-							'probability': str(r[1])}) 
-		return return_list 
+# Pad sequences for consistent input length
+max_sequence_length = 20
+input_sequences = pad_sequences(input_sequences, maxlen=max_sequence_length, padding='post')
+output_sequences = pad_sequences(output_sequences, maxlen=max_sequence_length, padding='post')
 
-def get_response(intents_list, intents_json): 
-	tag = intents_list[0]['intent'] 
-	list_of_intents = intents_json['intents'] 
-	result = "" 
-	for i in list_of_intents: 
-		if i['tag'] == tag: 
-			result = random.choice(i['responses']) 
-			break
-	return result 
+# Vocabulary size
+vocab_size = len(tokenizer.word_index) + 1
 
-print("Chatbot is up!") 
+# Build the model
+embedding_dim = 128
+units = 256
 
-while True: 
-	message = input("") 
-	ints = predict_class(message) 
-	res = get_response(ints, intents) 
-	print(res) 
+# Encoder
+encoder_inputs = tf.keras.layers.Input(shape=(max_sequence_length,))
+encoder_embedding = tf.keras.layers.Embedding(vocab_size, embedding_dim)(encoder_inputs)
+encoder_lstm = tf.keras.layers.LSTM(units, return_state=True)
+encoder_outputs, state_h, state_c = encoder_lstm(encoder_embedding)
+encoder_states = [state_h, state_c]
+
+# Decoder
+decoder_inputs = tf.keras.layers.Input(shape=(max_sequence_length,))
+decoder_embedding_layer = tf.keras.layers.Embedding(vocab_size, embedding_dim)
+decoder_embedding = decoder_embedding_layer(decoder_inputs)
+decoder_lstm = tf.keras.layers.LSTM(units, return_sequences=True, return_state=True)
+decoder_outputs, _, _ = decoder_lstm(decoder_embedding, initial_state=encoder_states)
+decoder_dense = tf.keras.layers.Dense(vocab_size, activation='softmax')
+output = decoder_dense(decoder_outputs)
+
+# Model
+model = tf.keras.models.Model([encoder_inputs, decoder_inputs], output)
+
+# Compile the model
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+# Train the model
+model.fit([input_sequences, output_sequences], np.expand_dims(output_sequences, -1), epochs=50, batch_size=64)
+
+# Inference function
+def chatbot_response(input_text):
+    input_seq = tokenizer.texts_to_sequences([input_text])
+    input_seq = pad_sequences(input_seq, maxlen=max_sequence_length, padding='post')
+    predicted_output_seq = model.predict([input_seq, input_seq])
+    predicted_output_seq = np.argmax(predicted_output_seq, axis=-1)
+    response = ""
+    for word_index in predicted_output_seq[0]:
+        if word_index == 0:
+            break
+        word = tokenizer.index_word[word_index]
+        response += word + " "
+    return response.strip()
+
+# Example usage
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == 'exit':
+        break
+    response = chatbot_response(user_input)
+    print("Chatbot:", response)
