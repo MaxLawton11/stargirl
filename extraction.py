@@ -1,7 +1,5 @@
 import sqlite3
 import pandas as pd
-import time
-import datetime
 
 # substitute username with your username
 conn = sqlite3.connect('chat.db')
