@@ -20,8 +20,14 @@ WHERE id='+16176826385'
 # get messages using the sql
 messages = pd.read_sql_query(SQL, conn)
 
-messages = messages.drop(index=[i for i in range(100)])
-print(messages)
+messages = messages.drop(index=[i for i in range(len(messages)-10)])
+
+for message in zip(messages['text'], messages['is_from_me']) :
+    if message[1] == True : # this works beacues 1==True
+        print(" "*20, end='')
+    print(message[0])
+
+
 
 #print(messages.columns.tolist())
 # sends to csv file on desktop
