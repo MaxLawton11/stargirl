@@ -4,7 +4,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 import pandas as pd
 import nltk
-from nltk.tokenize import word_tokenize
+
 nltk.download('punkt')
 
 # Load your dataset
