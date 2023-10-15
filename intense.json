@@ -2,5 +2,10 @@
     {"tag": "greetings",
     "patterns": ["hi", "hello"],
     "responses": ["fuck off.", "kill yourself."]
-    }
+    },
+
+    {"tag": "goodbye",
+        "patterns": ["bye", "goodbye"],
+        "responses": ["come again", "kill yourself."]
+        }
 ]}
