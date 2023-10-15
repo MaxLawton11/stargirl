@@ -12,12 +12,15 @@ SELECT datetime(message.date/1000000000 + strftime("%s", "2001-01-01") ,"unixepo
 FROM message
 LEFT JOIN handle
 ON message.handle_id = handle.ROWID
-WHERE id='+16176826385' AND text LIKE '%stella%' 
+WHERE id='+16176826385'
 """
+
+# WHERE id='+16176826385' AND text LIKE '%stella%' 
 
 # get messages using the sql
 messages = pd.read_sql_query(SQL, conn)
 
+messages = messages.drop(index=[i for i in range(100)])
 print(messages)
 
 #print(messages.columns.tolist())
