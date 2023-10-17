@@ -22,7 +22,7 @@ messages = pd.read_sql_query(SQL, conn)
 # limit to last few
 messages = messages.drop(index=[i for i in range(len(messages)-100)])
 
-print(messages['is_from_me'][0])
+print(messages['is_from_me'])
 
 questions, answers = [], []
 last_message_from, message_buildup = messages['is_from_me'][0], ""
