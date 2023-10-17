@@ -41,8 +41,8 @@ for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'
         message_buildup.join(message)
         continue
     else :
-        if questions == True : # this works beacues 1==Ture
-            answers.append(message) # from me
+        if is_from_me == True : # this works beacues 1==Ture
+            questions.append(message) # from me
         else :
             answers.append(message) # from her
         message_buildup=""
