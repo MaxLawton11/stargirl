@@ -41,6 +41,15 @@ for message, is_from_me, date_uct  in zip(messages['text'], messages['is_from_me
     else :
         answers.append(message)
         
+"""
+make one list
+combine same "thoughts" as one elsmet
+use each elemnt as both qwaetion and asswer
+
+look up if you can add more data like text to this model
+"""
+
+        
 print(questions, len(questions))
 print(answers, len(answers))
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
