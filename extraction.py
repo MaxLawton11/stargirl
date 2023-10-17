@@ -23,8 +23,9 @@ messages = pd.read_sql_query(SQL, conn)
 messages = messages.drop(index=[i for i in range(len(messages)-100)])
 
 questions, answers = [], []
-#last_message=0
-for message, is_from_me, date_uct  in zip(messages['text'], messages['is_from_me'], messages['date_uct']) :
+last_message_from, message_buildup = messages['is_from_me'][0], ""
+
+for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'], messages['date_uct']) :
     
     """ This will only be used for in-dept training.
     # check if it's a new chat
@@ -36,10 +37,16 @@ for message, is_from_me, date_uct  in zip(messages['text'], messages['is_from_me
     """
 
     # print message
-    if is_from_me == False : # this works beacues 0==False and 1==Ture
-        questions.append(message)
+    if last_message_from == is_from_me : # if this is still the same "thought"
+        message_buildup.join(message)
+        continue
     else :
-        answers.append(message)
+        if questions == True : # this works beacues 1==Ture
+            answers.append(message) # from me
+        else :
+            answers.append(message) # from her
+        message_buildup=""
+        
         
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
 print(export_dataframe)
