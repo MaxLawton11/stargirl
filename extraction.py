@@ -48,6 +48,9 @@ for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'
         message_buildup=""
         
         
+print(questions, len(questions))
+print(answers, len(answers))
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
 print(export_dataframe)
+
     
