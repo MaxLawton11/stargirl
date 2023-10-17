@@ -22,17 +22,25 @@ messages = pd.read_sql_query(SQL, conn)
 # limit to last few
 messages = messages.drop(index=[i for i in range(len(messages)-100)])
 
-last_message=0
+questions, answers = [], []
+#last_message=0
 for message, is_from_me, date_uct  in zip(messages['text'], messages['is_from_me'], messages['date_uct']) :
     
+    """ This will only be used for in-dept training.
     # check if it's a new chat
     processed_time = int(date_uct[11:].split(':')[:2][0])*60 + int(date_uct[11:].split(':')[:2][1])
     difference = processed_time-last_message
     if difference > 60 : # in minutes
         print('-'*10, "NEW CHAT", '-'*10)
     last_message = processed_time
+    """
 
     # print message
-    if is_from_me == True : # this works beacues 1==True
-        print(" "*20, end='')
-    print(message)
+    if is_from_me == False : # this works beacues 0==False and 1==Ture
+        questions.append(message)
+    else :
+        answers.append(message)
+        
+print(questions)
+print(answers)
+    
