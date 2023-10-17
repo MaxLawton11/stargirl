@@ -22,10 +22,8 @@ messages = pd.read_sql_query(SQL, conn)
 # limit to last few
 messages = messages.drop(index=[i for i in range(len(messages)-100)])
 
-print(messages['is_from_me'].iloc[0])
-
 questions, answers = [], []
-last_message_from, message_buildup = messages['is_from_me'][0], ""
+last_message_from, message_buildup = messages['is_from_me'].iloc[0], ""
 
 for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'], messages['date_uct']) :
     
