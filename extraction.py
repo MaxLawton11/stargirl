@@ -20,12 +20,11 @@ WHERE id='+16176826385'
 messages = pd.read_sql_query(SQL, conn)
 
 # limit to last few
-messages = messages.drop(index=[i for i in range(len(messages)-500)])
+messages = messages.drop(index=[i for i in range(len(messages)-100)])
 
 questions, answers = [], []
-last_message_from, message_buildup = messages['is_from_me'].iloc[0], ""
-
-for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'], messages['date_uct']) :
+#last_message=0
+for message, is_from_me, date_uct  in zip(messages['text'], messages['is_from_me'], messages['date_uct']) :
     
     """ This will only be used for in-dept training.
     # check if it's a new chat
@@ -36,21 +35,14 @@ for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'
     last_message = processed_time
     """
 
-    print(message, is_from_me, date_uct)
-    
     # print message
-    if last_message_from == is_from_me : # if this is still the same "thought"
-        message_buildup.join(message)
-        continue
+    if is_from_me == True : # this works beacues 0==False and 1==Ture
+        questions.append(message)
     else :
-        if is_from_me == True : # this works beacues 1==Ture
-            questions.append(message) # from me
-        else :
-            answers.append(message) # from her
-        message_buildup=""
-        last_message_from = is_from_me # reset
-
+        answers.append(message)
+        
+print(questions, len(questions))
+print(answers, len(answers))
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
 print(export_dataframe)
-
     
