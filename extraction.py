@@ -48,6 +48,7 @@ for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'
         else :
             answers.append(message) # from her
         message_buildup=""
+        last_message_from = is_from_me # reset
         
         
 print(questions, len(questions))
