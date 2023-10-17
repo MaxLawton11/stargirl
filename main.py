@@ -12,11 +12,11 @@ data = pd.read_csv('dataset.csv')
 
 # Tokenize the text data
 tokenizer = Tokenizer()
-tokenizer.fit_on_texts(data['questions'] + data['answers'])
+tokenizer.fit_on_texts(data['QUESTIONS'] + data['ANSWERS'])
 
 # Convert text to sequences
-input_sequences = tokenizer.texts_to_sequences(data['questions'])
-output_sequences = tokenizer.texts_to_sequences(data['answers'])
+input_sequences = tokenizer.texts_to_sequences(data['QUESTIONS'])
+output_sequences = tokenizer.texts_to_sequences(data['ANSWERS'])
 
 # Pad sequences for consistent input length
 max_sequence_length = 20
@@ -53,7 +53,11 @@ model = tf.keras.models.Model([encoder_inputs, decoder_inputs], output)
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # Train the model
-model.fit([input_sequences, output_sequences], np.expand_dims(output_sequences, -1), epochs=50, batch_size=64)
+model.fit([input_sequences, output_sequences], \
+    np.expand_dims(output_sequences, -1),
+    epochs=50,
+    batch_size=64
+    )
 
 # Inference function
 def chatbot_response(input_text):

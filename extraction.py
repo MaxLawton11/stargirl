@@ -6,7 +6,7 @@ conn = sqlite3.connect('chat.db')
 cur = conn.cursor()
 
 # define command
-SQL_COMMAND = """
+SQL = """
 SELECT datetime(message.date/1000000000 + strftime("%s", "2001-01-01"), "unixepoch", "localtime") AS date_uct, id, text, is_from_me
 FROM message
 LEFT JOIN handle
@@ -17,7 +17,7 @@ WHERE id='+16176826385'
 # WHERE id='+16176826385' AND text LIKE '%hi%' 
 
 # get messages using the sql
-messages = pd.read_sql_query(SQL_COMMAND, conn)
+messages = pd.read_sql_query(SQL, conn)
 
 # limit to last few
 messages = messages.drop(index=[i for i in range(len(messages)-100)])
