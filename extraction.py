@@ -43,6 +43,7 @@ for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'
     else :
         if is_from_me == True : # this works beacues 1==Ture
             questions.append(message) # from me
+            print("testing")
         else :
             answers.append(message) # from her
         message_buildup=""
@@ -50,6 +51,7 @@ for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'
         
 print(questions, len(questions))
 print(answers, len(answers))
+
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
 print(export_dataframe)
 
