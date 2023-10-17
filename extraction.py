@@ -20,7 +20,7 @@ WHERE id='+16176826385'
 messages = pd.read_sql_query(SQL, conn)
 
 # limit to last few
-messages = messages.drop(index=[i for i in range(len(messages)-100)])
+messages = messages.drop(index=[i for i in range(len(messages)-500)])
 
 questions, answers = [], []
 last_message_from, message_buildup = messages['is_from_me'].iloc[0], ""
@@ -49,10 +49,6 @@ for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'
             answers.append(message) # from her
         message_buildup=""
         last_message_from = is_from_me # reset
-        
-        
-print(questions, len(questions))
-print(answers, len(answers))
 
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
 print(export_dataframe)
