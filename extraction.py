@@ -36,6 +36,8 @@ for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'
     last_message = processed_time
     """
 
+    print(message, is_from_me, date_uct)
+    
     # print message
     if last_message_from == is_from_me : # if this is still the same "thought"
         message_buildup.join(message)
@@ -43,7 +45,6 @@ for message, is_from_me, date_uct in zip(messages['text'], messages['is_from_me'
     else :
         if is_from_me == True : # this works beacues 1==Ture
             questions.append(message) # from me
-            print("testing")
         else :
             answers.append(message) # from her
         message_buildup=""
