@@ -30,12 +30,14 @@ last_message, message_buildup = 1, ''
 for message, is_from_me  in zip(messages['text'], messages['is_from_me']) :
     if last_message==is_from_me :
         message = ''.join(message.splitlines()) # remove all whitespace
-        message_buildup = f"{message_buildup}. {message}" #add to last
+        if message_buildup != '' :
+            message_buildup = f"{message_buildup}. {message}" #add to last
+        else :
+            message_buildup = message
     else :
-      compiled_messages.append(message_buildup)
-      
-      # reset
-      message_buildup=''
+        compiled_messages.append(message_buildup)
+        # reset
+        message_buildup=''
     last_message=is_from_me
       
 print(len(compiled_messages))
