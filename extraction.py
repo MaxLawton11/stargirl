@@ -46,10 +46,9 @@ for message, is_from_me  in zip(messages['text'], messages['is_from_me']) :
 compiled_messages.append(message_buildup) # empty buildup
       
 # to prevent memory leak, we will remove all the vars that are no longer needed for the rest of time
-del messages # this is no longer needed becacue the list takes its place
-del conn; del cur; del SQL # database no longer needed
-del last_message; del message_buildup # remove bullshit
-
+#del messages # this is no longer needed becacue the list takes its place
+#del conn; del cur; del SQL # database no longer needed
+#del last_message; del message_buildup # remove bullshit
 
 
 print(compiled_messages)
