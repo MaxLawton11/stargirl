@@ -22,27 +22,31 @@ messages = pd.read_sql_query(SQL, conn)
 # limit to last few
 messages = messages.drop(index=[i for i in range(len(messages)-10)])
 
-print(messages)
 
+# loop thoguh all of the message to put them in one list
+# this is they can all be used for both qwestions ans aswers
+# also, this allows us to maintain there order
 compiled_messages = []
-
-last_message, message_buildup = 1, ''
+last_message = messages['is_from_me'].iloc[0]
+message_buildup = ''
 for message, is_from_me  in zip(messages['text'], messages['is_from_me']) :
+    
+    # if we are still on the same "thought"
     if last_message==is_from_me :
         message = ''.join(message.splitlines()) # remove all whitespace
         if message_buildup != '' :
-            message_buildup = f"{message_buildup}. {message}" #add to last
+            message_buildup = f"{message_buildup}. {message}" #add to last if there is already somthing in the bulidup
         else :
-            message_buildup = message
-    else :
+            message_buildup = message # make new buildup
+    else : # new "thought"
         compiled_messages.append(message_buildup)
-        # reset
-        message_buildup=''
-    last_message=is_from_me
+        message_buildup = message
+        
+    last_message=is_from_me # change/check current person
+
+compiled_messages.append(message_buildup) # empty buildup
       
-print(len(compiled_messages))
 print(compiled_messages)
-print(message_buildup)
 
 """
 make one list
