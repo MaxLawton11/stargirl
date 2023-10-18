@@ -22,7 +22,6 @@ messages = pd.read_sql_query(SQL, conn)
 # limit to last few
 messages = messages.drop(index=[i for i in range(len(messages)-10)])
 
-
 # loop thoguh all of the message to put them in one list
 # this is they can all be used for both qwestions ans aswers
 # also, this allows us to maintain there order
@@ -41,12 +40,20 @@ for message, is_from_me  in zip(messages['text'], messages['is_from_me']) :
     else : # new "thought"
         compiled_messages.append(message_buildup)
         message_buildup = message
-        
+
     last_message=is_from_me # change/check current person
 
 compiled_messages.append(message_buildup) # empty buildup
       
+# to prevent memory leak, we will remove all the vars that are no longer needed for the rest of time
+del messages # this is no longer needed becacue the list takes its place
+del conn; del cur; del SQL # database no longer needed
+del last_message; del message_buildup # remove bullshit
+
+
+
 print(compiled_messages)
+
 
 """
 make one list
@@ -54,27 +61,6 @@ combine same "thoughts" as one elsmet
 use each elemnt as both qwaetion and asswer
 
 look up if you can add more data like text to this model
-"""
-
-"""
-questions, answers = [], []
-#last_message=0
-for message, is_from_me, date_uct  in zip(messages['text'], messages['is_from_me'], messages['date_uct']) :
-    
-    This will only be used for in-dept training.
-    # check if it's a new chat
-    processed_time = int(date_uct[11:].split(':')[:2][0])*60 + int(date_uct[11:].split(':')[:2][1])
-    difference = processed_time-last_message
-    if difference > 60 : # in minutes
-        print('-'*10, "NEW CHAT", '-'*10)
-    last_message = processed_time
-    
-
-    # print message
-    if is_from_me == True : # this works beacues 0==False and 1==Ture
-        questions.append(message)
-    else :
-        answers.append(message)
 """
 
 """
