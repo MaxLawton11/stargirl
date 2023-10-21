@@ -19,9 +19,6 @@ WHERE id='+16176826385'
 # get messages using the sql
 messages = pd.read_sql_query(SQL, conn)
 
-# limit to last few
-messages = messages.drop(index=[i for i in range(len(messages)-100)])
-
 # loop thoguh all of the message to put them in one list
 # this is they can all be used for both qwestions ans aswers
 # also, this allows us to maintain there order
@@ -29,9 +26,7 @@ compiled_messages = []
 last_message = messages['is_from_me'].iloc[0]
 message_buildup = ''
 for message, is_from_me  in zip(messages['text'], messages['is_from_me']) :
-    
-    # if we are still on the same "thought"
-    if last_message==is_from_me :
+    if last_message==is_from_me : # if we are still on the same "thought"
         message = ''.join(message.splitlines()) # remove all whitespace
         if message_buildup != '' :
             message_buildup = f"{message_buildup}. {message}" #add to last if there is already somthing in the bulidup
@@ -40,9 +35,7 @@ for message, is_from_me  in zip(messages['text'], messages['is_from_me']) :
     else : # new "thought"
         compiled_messages.append(message_buildup)
         message_buildup = message
-
     last_message=is_from_me # change/check current person
-
 compiled_messages.append(message_buildup) # empty buildup
 
 # now we need to make the questions and answers list
@@ -53,5 +46,6 @@ for counter, message, in enumerate(compiled_messages) :
         questions.append(message) 
         answers.append(compiled_messages[counter+1])
 
+# make frame for exporting
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
 print(export_dataframe)
