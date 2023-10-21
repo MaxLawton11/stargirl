@@ -14,8 +14,6 @@ ON message.handle_id = handle.ROWID
 WHERE id='+16176826385'
 """
 
-# WHERE id='+16176826385' AND text LIKE '%hi%' 
-
 # get messages using the sql
 messages = pd.read_sql_query(SQL, conn)
 
@@ -48,4 +46,5 @@ for counter, message, in enumerate(compiled_messages) :
 
 # make frame for exporting
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
-print(export_dataframe)
+export_dataframe.to_csv('dataset.csv', index=False)
+print("-- Compilation Complete --")
