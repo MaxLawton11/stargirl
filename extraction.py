@@ -20,7 +20,7 @@ WHERE id='+16176826385'
 messages = pd.read_sql_query(SQL, conn)
 
 # limit to last few
-messages = messages.drop(index=[i for i in range(len(messages)-10)])
+messages = messages.drop(index=[i for i in range(len(messages)-100)])
 
 # loop thoguh all of the message to put them in one list
 # this is they can all be used for both qwestions ans aswers
@@ -50,21 +50,15 @@ compiled_messages.append(message_buildup) # empty buildup
 #del conn; del cur; del SQL # database no longer needed
 #del last_message; del message_buildup # remove bullshit
 
+questions,answers=[],[]
 
-print(compiled_messages)
+# now we need to make the questions and answers list
+for counter, message, in enumerate(compiled_messages) :
+    if counter < len(compiled_messages)-1 :
+        questions.append(message)
+        answers.append(compiled_messages[counter+1])
 
-
-"""
-make one list
-combine same "thoughts" as one elsmet
-use each elemnt as both qwaetion and asswer
-
-look up if you can add more data like text to this model
-"""
-
-"""
 print(questions, len(questions))
 print(answers, len(answers))
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
 print(export_dataframe)
-"""
