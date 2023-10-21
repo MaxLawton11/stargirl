@@ -44,21 +44,14 @@ for message, is_from_me  in zip(messages['text'], messages['is_from_me']) :
     last_message=is_from_me # change/check current person
 
 compiled_messages.append(message_buildup) # empty buildup
-      
-# to prevent memory leak, we will remove all the vars that are no longer needed for the rest of time
-#del messages # this is no longer needed becacue the list takes its place
-#del conn; del cur; del SQL # database no longer needed
-#del last_message; del message_buildup # remove bullshit
-
-questions,answers=[],[]
 
 # now we need to make the questions and answers list
+# take current for question and take next for answer
+questions,answers=[],[]
 for counter, message, in enumerate(compiled_messages) :
-    if counter < len(compiled_messages)-1 :
-        questions.append(message)
+    if counter < len(compiled_messages)-1 : # if there is room for more
+        questions.append(message) 
         answers.append(compiled_messages[counter+1])
 
-print(questions, len(questions))
-print(answers, len(answers))
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
 print(export_dataframe)
