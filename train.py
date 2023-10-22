@@ -59,24 +59,7 @@ model.fit([input_sequences, output_sequences], \
     batch_size=64
     )
 
-# Inference function
-def chatbot_response(input_text):
-    input_seq = tokenizer.texts_to_sequences([input_text])
-    input_seq = pad_sequences(input_seq, maxlen=max_sequence_length, padding='post')
-    predicted_output_seq = model.predict([input_seq, input_seq])
-    predicted_output_seq = np.argmax(predicted_output_seq, axis=-1)
-    response = ""
-    for word_index in predicted_output_seq[0]:
-        if word_index == 0:
-            break
-        word = tokenizer.index_word[word_index]
-        response += word + " "
-    return response.strip()
+# After training, save the model
+model.save('chatbot_model.h5')
+print("-- Model Trained --")
 
-# Example usage
-while True:
-    user_input = input("You: ")
-    if user_input.lower() == 'exit':
-        break
-    response = chatbot_response(user_input)
-    print("Chatbot:", response)
