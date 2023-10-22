@@ -14,6 +14,10 @@ data = pd.read_csv('dataset.csv')
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(data['QUESTIONS'] + data['ANSWERS'])
 
+# Save the tokenizer
+with open('tokenizer.pkl', 'wb') as handle:
+    pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
 # Convert text to sequences
 input_sequences = tokenizer.texts_to_sequences(data['QUESTIONS'])
 output_sequences = tokenizer.texts_to_sequences(data['ANSWERS'])
