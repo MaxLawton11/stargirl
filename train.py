@@ -59,7 +59,7 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 # Train the model
 model.fit([input_sequences, output_sequences], \
     np.expand_dims(output_sequences, -1),
-    epochs=100,
+    epochs=1,
     batch_size=64
     )
 
