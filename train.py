@@ -67,6 +67,7 @@ for _ in range(n_epochs) :
         batch_size=64
         )
     model.save('chatbot_model.h5')
+    print("finished epoch", _)
 
 # After training, save the model
 print("-- Model Trained --")
