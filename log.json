@@ -1,7 +1,7 @@
 {
   "epochs": 0,
   "max_sequence_length": 20,
-  "batch_size": 125,
+  "batch_size": 64,
   "model_file_name": "chatbot_model.h5",
   "tokenizer_file_name": "tokenizer.plk"
 }
