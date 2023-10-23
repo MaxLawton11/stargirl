@@ -58,13 +58,16 @@ model = tf.keras.models.Model([encoder_inputs, decoder_inputs], output)
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # Train the model
-model.fit([input_sequences, output_sequences], \
-    np.expand_dims(output_sequences, -1),
-    epochs=100,
-    batch_size=64
-    )
+# we are traing with a loop cuz somtimes the computer shits the bed
+n_epochs = 25
+for _ in range(n_epochs) :
+    model.fit([input_sequences, output_sequences], \
+        np.expand_dims(output_sequences, -1),
+        epochs=1,
+        batch_size=64
+        )
+    model.save('chatbot_model.h5')
 
 # After training, save the model
-model.save('chatbot_model.h5')
 print("-- Model Trained --")
 
