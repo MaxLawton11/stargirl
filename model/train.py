@@ -30,16 +30,14 @@ n_epochs = 5
 model.fit([input_sequences, output_sequences], np.expand_dims(output_sequences, -1), epochs=n_epochs, batch_size=batch_size )
 
 model.save('instances/model.keras')
-    
-new_log = {
-  "epochs": log['epochs']+n_epochs,
-  "max_sequence_length": max_sequence_length,
-  "batch_size": batch_size,
-  "model_file_name": "instances/model.keras",
-  "tokenizer_file_name": "instances/tokenizer.plk"
-  }
+
 
 with open("instances/log.json", "w") as log_file:
+    new_log = {
+        "epochs": log['epochs']+n_epochs,
+        "max_sequence_length": max_sequence_length,
+        "batch_size": batch_size
+        }
     json.dump(new_log, log_file, indent=2)
     
 print(f"-- Model Trained ({n_epochs} epochs) --")
