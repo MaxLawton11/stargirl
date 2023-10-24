@@ -1,8 +1,7 @@
 {
-  "is_present": false,
   "epochs": 0,
-  "max_sequence_length": 20,
+  "max_sequence_length": 0,
   "batch_size": 64,
-  "model_file_name": "chatbot_model.h5",
-  "tokenizer_file_name": "tokenizer.plk"
-}
+  "model_file_name": "instances/model.keras",
+  "tokenizer_file_name": "instances/tokenizer.plk"
+  }

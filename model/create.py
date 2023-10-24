@@ -10,10 +10,8 @@ import json
 #import nltk
 #nltk.download('punkt')
 
-# load dataset
-data = pd.read_csv('data/dataset.csv')
-
 # tokenize text data
+data = pd.read_csv('data/dataset.csv')
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(data['QUESTIONS'] + data['ANSWERS'])
 
@@ -21,19 +19,8 @@ tokenizer.fit_on_texts(data['QUESTIONS'] + data['ANSWERS'])
 with open('instances/tokenizer.pkl', 'wb') as handle:
     pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-# Convert text to sequences
-input_sequences = tokenizer.texts_to_sequences(data['QUESTIONS'])
-output_sequences = tokenizer.texts_to_sequences(data['ANSWERS'])
-
-# Pad sequences for consistent input length
 max_sequence_length = 20
-input_sequences = pad_sequences(input_sequences, maxlen=max_sequence_length, padding='post')
-output_sequences = pad_sequences(output_sequences, maxlen=max_sequence_length, padding='post')
-
-# Vocabulary size
 vocab_size = len(tokenizer.word_index) + 1
-
-# Build the model
 embedding_dim = 128
 units = 256
 
