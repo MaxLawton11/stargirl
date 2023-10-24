@@ -12,7 +12,7 @@ max_sequence_length = log['max_sequence_length']
 batch_size = log['max_sequence_length']
 
 # Load the tokenizer (assuming it's saved along with the model)
-with open('tokenizer.pkl', 'rb') as handle:
+with open('instances/tokenizer.pkl', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
 # Convert data to sequences
