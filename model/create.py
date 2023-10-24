@@ -72,3 +72,5 @@ log = {
 
 with open("instances/log.json", "w") as log_file:
     json.dump(log, log_file, indent=4)
+    
+print("-- Model Created & Saved --")
