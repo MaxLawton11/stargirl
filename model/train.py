@@ -1,5 +1,4 @@
 import tensorflow as tf
-from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 import pandas as pd
@@ -27,10 +26,20 @@ model = tf.keras.models.load_model('instances/model.keras')
 
 # Train the model
 # we are traing with a loop cuz somtimes the computer shits the bed
-n_epochs = 25
-for _ in range(1, n_epochs+1) :
-    model.fit([input_sequences, output_sequences], np.expand_dims(output_sequences, -1), epochs=1, batch_size=batch_size )
-    model.save('instances/model.keras')
-    print("finished epoch", _)
+n_epochs = 5
+model.fit([input_sequences, output_sequences], np.expand_dims(output_sequences, -1), epochs=n_epochs, batch_size=batch_size )
+
+model.save('instances/model.keras')
     
-print("-- Model Trained --")
+new_log = {
+  "epochs": log['epochs']+n_epochs,
+  "max_sequence_length": max_sequence_length,
+  "batch_size": batch_size,
+  "model_file_name": "instances/model.keras",
+  "tokenizer_file_name": "instances/tokenizer.plk"
+  }
+
+with open("instances/log.json", "w") as log_file:
+    json.dump(new_log, log_file, indent=2)
+    
+print(f"-- Model Trained ({n_epochs} epochs) --")

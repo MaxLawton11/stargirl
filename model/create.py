@@ -1,14 +1,9 @@
 import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 import pandas as pd
 import pickle
 import json
-
-# i don't think these are used at all...
-#import nltk
-#nltk.download('punkt')
 
 # tokenize text data
 data = pd.read_csv('data/dataset.csv')
@@ -49,7 +44,7 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 # save file
 model.save('instances/model.keras')
 
-log = {
+new_log = {
   "epochs": 0,
   "max_sequence_length": max_sequence_length,
   "batch_size": 64,
@@ -58,6 +53,6 @@ log = {
   }
 
 with open("instances/log.json", "w") as log_file:
-    json.dump(log, log_file, indent=2)
+    json.dump(new_log, log_file, indent=2)
     
 print("-- Model Created --")
