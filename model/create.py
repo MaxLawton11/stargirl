@@ -66,11 +66,11 @@ log = {
   "epochs": 0,
   "max_sequence_length": max_sequence_length,
   "batch_size": 64,
-  "model_file_name": "instances/model.h5",
+  "model_file_name": "instances/model.keras",
   "tokenizer_file_name": "instances/tokenizer.plk"
   }
 
 with open("instances/log.json", "w") as log_file:
-    json.dump(log, log_file, indent=4)
+    json.dump(log, log_file, indent=2)
     
-print("-- Model Created & Saved --")
+print("-- Model Created --")
