@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 # connect to the database
-conn = sqlite3.connect('chat.db')
+conn = sqlite3.connect('data/chat.db')
 cur = conn.cursor()
 
 # define command
@@ -46,5 +46,5 @@ for counter, message, in enumerate(compiled_messages) :
 
 # make frame for exporting
 export_dataframe = pd.DataFrame(data={'QUESTIONS':questions, 'ANSWERS':answers })
-export_dataframe.to_csv('dataset.csv', index=False)
+export_dataframe.to_csv('data/dataset.csv', index=False)
 print("-- Compilation Complete --")
