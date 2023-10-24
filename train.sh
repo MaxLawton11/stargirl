@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 Python/Generate.py
+python3 model/train.py
