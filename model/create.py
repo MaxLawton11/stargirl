@@ -60,7 +60,7 @@ model = tf.keras.models.Model([encoder_inputs, decoder_inputs], output)
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # save file
-model.save('instances/model.h5')
+model.save('instances/model.keras')
 
 log = {
   "epochs": 0,
@@ -71,4 +71,4 @@ log = {
   }
 
 with open("instances/log.json", "w") as log_file:
-    json.dump(data, log_file, indent=4)
+    json.dump(log, log_file, indent=4)
