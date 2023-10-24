@@ -1,5 +1,8 @@
 #!/bin/bash
 if test -f instances/tokenizer.pkl; then
-  echo "File exists."
+  if test -f instances/model.keras; then
+    echo "No model found. Creating new model..."
+    python3 model/create.py
+  fi
 fi
 python3 model/train.py
