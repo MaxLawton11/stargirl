@@ -4,19 +4,21 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 import pandas as pd
 import pickle
-import nltk
+import json
 
-nltk.download('punkt')
+# i don't think these are used at all...
+#import nltk
+#nltk.download('punkt')
 
-# Load your dataset
-data = pd.read_csv('dataset.csv')
+# load dataset
+data = pd.read_csv('data/dataset.csv')
 
-# Tokenize the text data
+# tokenize text data
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(data['QUESTIONS'] + data['ANSWERS'])
 
-# Save the tokenizer
-with open('tokenizer.pkl', 'wb') as handle:
+# save the tokenizer
+with open('instances/tokenizer.pkl', 'wb') as handle:
     pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 # Convert text to sequences
@@ -51,24 +53,22 @@ decoder_outputs, _, _ = decoder_lstm(decoder_embedding, initial_state=encoder_st
 decoder_dense = tf.keras.layers.Dense(vocab_size, activation='softmax')
 output = decoder_dense(decoder_outputs)
 
-# Model
+# model
 model = tf.keras.models.Model([encoder_inputs, decoder_inputs], output)
 
-# Compile the model
+# compile the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-# Train the model
-# we are traing with a loop cuz somtimes the computer shits the bed
-n_epochs = 25
-for _ in range(n_epochs) :
-    model.fit([input_sequences, output_sequences], \
-        np.expand_dims(output_sequences, -1),
-        epochs=1,
-        batch_size=64
-        )
-    model.save('chatbot_model.h5')
-    print("finished epoch", _)
+# save file
+model.save('instances/model.h5')
 
-# After training, save the model
-print("-- Model Trained --")
+log = {
+  "epochs": 0,
+  "max_sequence_length": max_sequence_length,
+  "batch_size": 64,
+  "model_file_name": "instances/model.h5",
+  "tokenizer_file_name": "instances/tokenizer.plk"
+  }
 
+with open("instances/log.json", "w") as log_file:
+    json.dump(data, log_file, indent=4)
