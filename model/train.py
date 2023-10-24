@@ -6,7 +6,7 @@ import pandas as pd
 import pickle
 import json
 
-log = json.load('instances/log.json')
+log = json.load(open('instances/log.json'))
 
 max_sequence_length = log['max_sequence_length']
 batch_size = log['max_sequence_length']
