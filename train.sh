@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if instances/tokenizer.pkl; then
+if ! -f instances/tokenizer.pkl; then
   echo "\$ Didn't find 'tokenizer.pkl'. Creating new model..."
   python3 model/create.py
 fi
