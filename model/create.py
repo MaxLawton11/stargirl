@@ -1,4 +1,5 @@
 import tensorflow as tf
+from tensorflow.keras.metrics import SparseCategoricalAccuracy 
 from tensorflow.keras.preprocessing.text import Tokenizer
 import numpy as np
 import pandas as pd
