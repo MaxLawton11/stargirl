@@ -8,7 +8,7 @@ import json
 log = json.load(open('instances/log.json'))
 
 max_sequence_length = log['max_sequence_length']
-batch_size = log['max_sequence_length']
+batch_size = log['batch_size']
 
 # Load the tokenizer (assuming it's saved along with the model)
 with open('instances/tokenizer.pkl', 'rb') as handle:
