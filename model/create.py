@@ -40,7 +40,7 @@ output = decoder_dense(decoder_outputs)
 model = tf.keras.models.Model([encoder_inputs, decoder_inputs], output)
 
 # compile the model
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=[SparseCategoricalAccuracy()])
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy', SparseCategoricalAccuracy()])
 
 # save file
 model.save('instances/model.keras')
