@@ -46,7 +46,6 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 model.save('instances/model.keras')
 
 with open("instances/log.json", "w") as log_file:
-    json.dump(new_log, log_file, indent=2)
     new_log = {
         "epochs": 0,
         "max_sequence_length": max_sequence_length,
