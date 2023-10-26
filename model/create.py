@@ -15,7 +15,7 @@ tokenizer.fit_on_texts(data['QUESTIONS'] + data['ANSWERS'])
 with open('instances/tokenizer.pkl', 'wb') as handle:
     pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-max_sequence_length = 20
+max_sequence_length = 100
 vocab_size = len(tokenizer.word_index) + 1
 embedding_dim = 128
 units = 256
