@@ -39,11 +39,10 @@ output = decoder_dense(decoder_outputs)
 model = tf.keras.models.Model([encoder_inputs, decoder_inputs], output)
 
 # compile the model
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=[SparseCategoricalAccuracy()])
 
 # save file
 model.save('instances/model.keras')
-
 
 with open("instances/log.json", "w") as log_file:
     json.dump(new_log, log_file, indent=2)
