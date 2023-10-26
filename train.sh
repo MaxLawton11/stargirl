@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if ! instances/tokenizer.pkl; then
-  if ! instances/model.keras; then
+if ! test instances/tokenizer.pkl; then
+  if ! test instances/model.keras; then
     echo "\$ Didn't find saved model. Creating new model..."
     python3 model/create.py
   fi
