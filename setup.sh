@@ -1,6 +1,6 @@
 #!/bin/bash
 
-print("$ Installing dependencies...")
+print("\$ Installing dependencies...")
 
-print("$ Setting up dataset...")
+print("\$ Setting up dataset...")
 python3 data/extraction.py
