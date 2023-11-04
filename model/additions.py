@@ -1,4 +1,5 @@
 import os.path
+import json
 
 def loadLog(file_location:str) :
   # gate claues to see if file is real
