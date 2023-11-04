@@ -1,10 +1,12 @@
 #!/bin/bash
 
 if ! test instances/tokenizer.pkl; then
-  if ! test instances/model.keras; then
-    echo "\$ Didn't find saved model. Creating new model..."
-    python3 model/create.py
-  fi
+  echo "\$ Didn't find saved model. Creating new model..."
+  python3 model/create.py
+  #if ! test instances/model.keras; then
+    #echo "\$ Didn't find saved model. Creating new model..."
+    #python3 model/create.py
+  #fi
 fi
 
 echo "\$ Training the model..."
