@@ -6,9 +6,9 @@ import pandas as pd
 import pickle
 import json
 
-import additions
+from additions import *
 
-max_sequence_length, batch_size = additions.loadLogs('instances/log.json')
+max_sequence_length, batch_size = loadLogs('instances/log.json')
 
 # Load the tokenizer (assuming it's saved along with the model)
 with open('instances/tokenizer.pkl', 'rb') as handle:
