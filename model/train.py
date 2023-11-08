@@ -8,7 +8,7 @@ import json
 
 import additions 
 
-max_sequence_length, batch_size = additions.loadLog('instances/log.json')
+current_epochs, max_sequence_length, batch_size = additions.loadLog('instances/log.json')
 
 # Load the tokenizer (assuming it's saved along with the model)
 with open('instances/tokenizer.pkl', 'rb') as handle:
@@ -29,13 +29,6 @@ n_epochs = 5
 model.fit([input_sequences, output_sequences], np.expand_dims(output_sequences, -1), epochs=n_epochs, batch_size=batch_size )
 
 model.save('instances/model.keras')
-
-with open("instances/log.json", "w") as log_file:
-    new_log = {
-        "epochs": log['epochs']+n_epochs,
-        "max_sequence_length": max_sequence_length,
-        "batch_size": batch_size
-        }
-    json.dump(new_log, log_file, indent=2)
+setLog("instances/log.json", current_epochs+n_epochs, max_sequence_length)
     
 print(f"-- Model Trained ({n_epochs} epochs) --")
