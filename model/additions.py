@@ -7,7 +7,7 @@ def loadLog(file_location:str) :
     raise Exception("Log file not found.")
     
   log = json.load(open(file_location))
-  return log['max_sequence_length'], log['batch_size']
+  return log['epochs'], log['max_sequence_length'], log['batch_size']
 
 def setLog(file_location:str, epochs, max_sequence_length) :
   with open(file_location, "w") as log_file:
