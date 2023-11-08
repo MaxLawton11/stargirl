@@ -28,7 +28,8 @@ output_sequences = pad_sequences(output_sequences, maxlen=max_sequence_length, p
 n_epochs = 5
 model.fit([input_sequences, output_sequences], np.expand_dims(output_sequences, -1), epochs=n_epochs, batch_size=batch_size )
 
+#save files
 model.save('instances/model.keras')
-setLog("instances/log.json", current_epochs+n_epochs, max_sequence_length)
+additions.setLog("instances/log.json", current_epochs+n_epochs, max_sequence_length)
     
 print(f"-- Model Trained ({n_epochs} epochs) --")
