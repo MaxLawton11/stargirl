@@ -6,6 +6,8 @@ import pandas as pd
 import pickle
 import json
 
+import additions
+
 # tokenize text data
 data = pd.read_csv('data/dataset.csv')
 tokenizer = Tokenizer()
@@ -42,15 +44,8 @@ model = tf.keras.models.Model([encoder_inputs, decoder_inputs], output)
 # compile the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy', SparseCategoricalAccuracy()])
 
-# save file
+# save files
 model.save('instances/model.keras')
-
-with open("instances/log.json", "w") as log_file:
-    new_log = {
-        "epochs": 0,
-        "max_sequence_length": max_sequence_length,
-        "batch_size": 64
-        }
-    json.dump(new_log, log_file, indent=2)
+additions.setLog("instances/log.json", 0, max_sequence_length)
     
 print("-- Model Created --")
