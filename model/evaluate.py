@@ -8,7 +8,7 @@ import json
 
 import additions
 
-max_sequence_length, _ = additions.loadLogs('instances/log.json')
+_, max_sequence_length, _ = additions.loadLogs('instances/log.json')
 
 # Load the tokenizer (assuming it's saved along with the model)
 with open('instances/tokenizer.pkl', 'rb') as handle:
