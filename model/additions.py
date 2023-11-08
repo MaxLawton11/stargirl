@@ -15,5 +15,5 @@ def setLog(file_location:str, epochs, max_sequence_length) :
           "epochs": 0,
           "max_sequence_length": max_sequence_length,
           "batch_size": 64
-      }
+          }
       json.dump(new_log, log_file, indent=2) # save file
