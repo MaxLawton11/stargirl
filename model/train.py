@@ -24,8 +24,10 @@ output_sequences = tokenizer.texts_to_sequences(data['ANSWERS'])
 input_sequences = pad_sequences(input_sequences, maxlen=max_sequence_length, padding='post')
 output_sequences = pad_sequences(output_sequences, maxlen=max_sequence_length, padding='post')
 
+print(f"-- Starting on epoch {current_epochs}")
+
 # Train the model
-n_epochs = 5
+n_epochs = 1
 model.fit([input_sequences, output_sequences], np.expand_dims(output_sequences, -1), epochs=n_epochs, batch_size=batch_size )
 
 #save files
