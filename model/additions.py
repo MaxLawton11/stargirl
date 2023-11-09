@@ -12,7 +12,7 @@ def setLog(file_location:str, epochs, max_sequence_length) :
   # open log file (will create new one if not found)
   with open(file_location, "w") as log_file:
       new_log = {
-          "epochs": 0,
+          "epochs": epochs,
           "max_sequence_length": max_sequence_length,
           "batch_size": 64
           }
