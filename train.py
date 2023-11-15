@@ -121,27 +121,19 @@ def main(hparams):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--save_model", default="model.h5", type=str, help="path save the model"
-    )
-    parser.add_argument(
-        "--max_samples",
-        default=25000,
-        type=int,
-        help="maximum number of conversation pairs to use",
-    )
-    parser.add_argument(
-        "--max_length", default=40, type=int, help="maximum sentence length"
-    )
-    parser.add_argument("--batch_size", default=64, type=int)
-    parser.add_argument("--num_layers", default=2, type=int)
-    parser.add_argument("--num_units", default=512, type=int)
-    parser.add_argument("--d_model", default=256, type=int)
-    parser.add_argument("--num_heads", default=8, type=int)
-    parser.add_argument("--dropout", default=0.1, type=float)
-    parser.add_argument("--activation", default="relu", type=str)
-    parser.add_argument("--epochs", default=20, type=int)
     
-    args = argparse.Namespace(save_model='model.h5', max_samples=25000, max_length=40, batch_size=64, num_layers=2, num_units=512, d_model=256, num_heads=8, dropout=0.1, activation='relu', epochs=20)
+    args = argparse.Namespace(\
+        save_model='model.h5', # path save the model
+        max_samples=25000, # maximum number of conversation pairs to use
+        max_length=40, # maximum sentence length
+        batch_size=64, 
+        num_layers=2, 
+        num_units=512, 
+        d_model=256, 
+        num_heads=8, 
+        dropout=0.1, 
+        activation='relu', 
+        epochs=20
+        )
+    
     main(args)
