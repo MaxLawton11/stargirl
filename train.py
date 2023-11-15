@@ -142,5 +142,6 @@ if __name__ == "__main__":
     parser.add_argument("--dropout", default=0.1, type=float)
     parser.add_argument("--activation", default="relu", type=str)
     parser.add_argument("--epochs", default=20, type=int)
-
+    
+    print(parser.parse_args())
     main(parser.parse_args())
