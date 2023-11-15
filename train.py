@@ -143,5 +143,7 @@ if __name__ == "__main__":
     parser.add_argument("--activation", default="relu", type=str)
     parser.add_argument("--epochs", default=20, type=int)
     
+    print("-"*20)
     print(parser.parse_args())
+    print("-"*20)
     main(parser.parse_args())
