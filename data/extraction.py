@@ -14,15 +14,14 @@ ON message.handle_id = handle.ROWID
 WHERE id='+16176826385'
 """
 
-# get messages using the sql
+# get messages using the sql and put in dataframe
 messages = pd.read_sql_query(SQL, conn)
 
 # loop thoguh all of the message to put them in one list
-# this is they can all be used for both qwestions ans aswers
+# this is so they can all be used for both qwestions and answers
 # also, this allows us to maintain there order
-compiled_messages = []
+compiled_messages = []; message_buildup = ''
 last_message = messages['is_from_me'].iloc[0]
-message_buildup = ''
 for message, is_from_me  in zip(messages['text'], messages['is_from_me']) :
     if last_message==is_from_me : # if we are still on the same "thought"
         message = ''.join(message.splitlines()) # remove all whitespace
