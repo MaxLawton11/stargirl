@@ -5,14 +5,15 @@ def loadLog(file_location:str) :
     # gate claues to see if file is real
     if not os.path.isfile(file_location) :
         raise Exception("Log file not found.")
+    
     log = json.load(open(file_location))
     return log['epochs'], log['max_sequence_length'], log['batch_size']
 
-def setLog(file_location:str, epochs, max_sequence_length) :
+def setLog(file_location:str, epochs:int, max_sequence_length:int) :
     # open log file (will create new one if not found)
     with open(file_location, "w") as log_file:
         new_log = {
-            "epochs": epochs,
+            "epochs": epochs, 
             "max_sequence_length": max_sequence_length,
             "batch_size": 64
             }
