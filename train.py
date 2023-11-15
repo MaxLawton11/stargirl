@@ -143,7 +143,5 @@ if __name__ == "__main__":
     parser.add_argument("--activation", default="relu", type=str)
     parser.add_argument("--epochs", default=20, type=int)
     
-    print("-"*20)
-    print(parser.parse_args())
-    print("-"*20)
-    main(parser.parse_args())
+    args = argparse.Namespace(save_model='model.h5', max_samples=25000, max_length=40, batch_size=64, num_layers=2, num_units=512, d_model=256, num_heads=8, dropout=0.1, activation='relu', epochs=20)
+    main(args)
