@@ -106,6 +106,7 @@ def main(hparams):
 
     print(f"\nclear TensorFlow backend session and load model from {hparams.save_model}...")
     del chatbot
+    
     tf.keras.backend.clear_session()
     chatbot = tf.keras.models.load_model(
         hparams.save_model,
