@@ -121,6 +121,7 @@ def main(hparams):
 
 if __name__ == "__main__":
     
+    # training vars
     args = argparse.Namespace(\
         save_model='model.h5', # path save the model
         max_samples=25000, # maximum number of conversation pairs to use
