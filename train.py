@@ -37,8 +37,7 @@ def inference(hparams, chatbot, tokenizer, sentence):
         if tf.equal(predicted_id, hparams.end_token[0]):
             break
 
-        # concatenated the predicted_id to the output which is given to the decoder
-        # as its input.
+        # concatenated the predicted_id to the output which is given to the decoder as its input.
         output = tf.concat([output, predicted_id], axis=-1)
 
     return tf.squeeze(output, axis=0)
