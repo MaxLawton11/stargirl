@@ -1,8 +1,20 @@
 def testResponse(prmpt) :
     return prmpt.upper()
+
+def printLogo() :
+    logo_raw = """
+     __  __              _                    _              
+    |  \/  |            | |                  | |             
+    | \  / | __ ___  __ | |     __ ___      _| |_ ___  _ __  
+    | |\/| |/ _` \ \/ / | |    / _` \ \ /\ / / __/ _ \| '_ \ 
+    | |  | | (_| |>  <  | |___| (_| |\ V  V /| || (_) | | | |
+    |_|  |_|\__,_/_/\_\ |______\__,_| \_/\_/  \__\___/|_| |_|                                                   
+    """
+    print(logo_raw)
     
 
 while True:
+    printLogo()
     try :
         prompt = input("#>>")
     except KeyboardInterrupt :
