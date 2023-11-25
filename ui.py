@@ -12,17 +12,18 @@ def printLogo() :
     """
     print(logo_raw)
     
-
-while True:
+def main() :
     printLogo()
-    try :
-        prompt = input("#>>")
-    except KeyboardInterrupt :
-        print("goodbye!")
+    while True:
+        try :
+            prompt = input("#>>")
+        except KeyboardInterrupt :
+            print("goodbye!")
+            
+        response = testResponse(prompt)
+        print("\033[92mhe$>> {}\033[00m".format(str(response)))
         
-    response = testResponse(prompt)
-    print("\033[92mhe$>> {}\033[00m".format(str(response)))
-        
-    
+if __name__ == "__main__":
+    main()
     
     
