@@ -4,7 +4,7 @@ import tensorflow as tf
 from transformer import model
 from transformer.dataset import get_dataset, preprocess_sentence
 
-
+# um what does this do...
 class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
     def __init__(self, d_model: int, warmup_steps: int = 4000):
         super(CustomSchedule, self).__init__()
