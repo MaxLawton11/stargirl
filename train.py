@@ -17,6 +17,7 @@ class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
         return tf.math.rsqrt(self.d_model) * tf.math.minimum(arg1, arg2)
 
 
+# used for telling what the chatbot says
 def inference(hparams, chatbot, tokenizer, sentence):
     sentence = preprocess_sentence(sentence)
 
@@ -42,7 +43,7 @@ def inference(hparams, chatbot, tokenizer, sentence):
 
     return tf.squeeze(output, axis=0)
 
-
+# gen cont.
 def predict(hparams, chatbot, tokenizer, sentence):
     prediction = inference(hparams, chatbot, tokenizer, sentence)
     predicted_sentence = tokenizer.decode(
@@ -50,7 +51,7 @@ def predict(hparams, chatbot, tokenizer, sentence):
     )
     return predicted_sentence
 
-
+# gen cont..
 def evaluate(hparams, chatbot, tokenizer):
     print("\nEvaluate")
     sentence = "where have you been?"
