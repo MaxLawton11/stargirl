@@ -12,4 +12,4 @@ with open("working_scrips/new_log.json", "w") as log_output_file:
         "max_sequence_length": 20,
         "batch_size": 64
         }
-json.dump(new_log_contents, log_output_file, indent=2) # save file
+    json.dump(new_log_contents, log_output_file, indent=2) # save file

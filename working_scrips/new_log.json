@@ -1,0 +1,5 @@
+{
+  "epochs": 5,
+  "max_sequence_length": 20,
+  "batch_size": 64
+}
