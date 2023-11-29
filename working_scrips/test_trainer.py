@@ -15,7 +15,7 @@ except print(0):
     # DO NOT CHANGE LOG
     pass
 
-# print new files
+# print new contets to file
 with open(log_filename, 'w') as log_output_file:
     new_log_contents = {
         "model_filename" : log['model_filename'],
