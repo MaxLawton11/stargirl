@@ -1,12 +1,14 @@
 import json
 
+log_filename = 'working_scrips/log.json'
+
 # convert into JSON:
-log = json.load(open('working_scrips/log.json')) # cuz this is not root we need teh folder idfk
+log = json.load(open(log_filename)) # cuz this is not root we need teh folder idfk
 
 for c in log :
     print(f"{c} - {log[c]}")
 
-with open("working_scrips/new_log.json", "w") as log_output_file:
+with open(log_filename, 'w') as log_output_file:
     new_log_contents = {
         "epochs": 5, 
         "max_sequence_length": 20,
