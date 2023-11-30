@@ -11,7 +11,7 @@ try:
     # try to train run_nepochs's
     pass
     # increse epoch in log
-except print(0):
+except :
     # DO NOT CHANGE LOG
     pass
 
