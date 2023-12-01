@@ -1,5 +1,6 @@
 to-do:
-make model folder
+- make model folder
+- make class so model I easy to use
 
 new model: 
 https://github.com/bryanlimy/tf2-transformer-chatbot
