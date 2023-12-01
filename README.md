@@ -1,3 +1,6 @@
+to-do:
+make model folder
+
 new model: 
 https://github.com/bryanlimy/tf2-transformer-chatbot
 https://blog.tensorflow.org/2019/05/transformer-chatbot-tutorial-with-tensorflow-2.html
