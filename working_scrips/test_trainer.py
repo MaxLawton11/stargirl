@@ -1,11 +1,11 @@
 import json
+import model
 
 log_filename = 'working_scrips/log.json'
 run_nepochs = 1
 
 # convert into JSON:
 log = json.load(open(log_filename)) # cuz this is not root we need teh folder idfk
-
 
 try:
     # try to train run_nepochs's
