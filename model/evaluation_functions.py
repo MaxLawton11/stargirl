@@ -1,10 +1,8 @@
 import argparse
 import tensorflow as tf
-
 from transformer import model
 from transformer.dataset import get_dataset, preprocess_sentence
 
-# used for telling what the chatbot says
 def inference(hparams, chatbot, tokenizer, sentence):
     sentence = preprocess_sentence(sentence)
 
@@ -30,7 +28,6 @@ def inference(hparams, chatbot, tokenizer, sentence):
 
     return tf.squeeze(output, axis=0)
 
-# gen cont.
 def predict(hparams, chatbot, tokenizer, sentence):
     prediction = inference(hparams, chatbot, tokenizer, sentence)
     predicted_sentence = tokenizer.decode(
@@ -38,7 +35,6 @@ def predict(hparams, chatbot, tokenizer, sentence):
     )
     return predicted_sentence
 
-# gen cont..
 def evaluate(hparams, chatbot, tokenizer):
     print("\nEvaluate")
     sentence = "where have you been?"
@@ -54,25 +50,3 @@ def evaluate(hparams, chatbot, tokenizer):
         output = predict(hparams, chatbot, tokenizer, sentence)
         print(f"\ninput: {sentence}\noutput: {output}")
         sentence = output
-
-
-"""
-if __name__ == "__main__":
-    
-    # training vars
-    args = argparse.Namespace(\
-        save_model='model.h5', # path save the model
-        max_samples=25000, # maximum number of conversation pairs to use
-        max_length=40, # maximum sentence length
-        batch_size=64, 
-        num_layers=2, 
-        num_units=512, 
-        d_model=256, 
-        num_heads=8, 
-        dropout=0.1, 
-        activation='relu', 
-        epochs=20
-        )
-    
-    main(args)
-"""
