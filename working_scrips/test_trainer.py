@@ -11,6 +11,7 @@ try:
     # try to train run_nepochs's
     pass
     # increse epoch in log
+    log['epochs'] += 2
 except :
     # DO NOT CHANGE LOG
     pass
