@@ -11,7 +11,7 @@ class Model():
         self.hparams = hparams
         self.dataset, self.tokenizer = get_dataset(hparams)
         
-    def train(self, epochs) :
+    def _loadModel(self) :
         tf.keras.backend.clear_session()
         chatbot = tf.keras.models.load_model(
             self.hparams.save_model,
@@ -21,6 +21,11 @@ class Model():
             },
             compile=False,
         )
+        return chatbot
+        
+        
+    def train(self, epochs) :
+        chatbot = self._loadModel()
         
         chatbot.fit(self.dataset, epochs=epochs)
         
@@ -30,14 +35,6 @@ class Model():
         del chatbot
         
     def evaluate(self) :
-        tf.keras.backend.clear_session()
-        chatbot = tf.keras.models.load_model(
-            self.hparams.save_model,
-            custom_objects={
-                "PositionalEncoding": model.PositionalEncoding,
-                "MultiHeadAttentionLayer": model.MultiHeadAttentionLayer,
-            },
-            compile=False,
-        )
+        chatbot = self._loadModel()
         evaluation_functions.evaluate(self.hparams, chatbot, self.tokenizer)
         

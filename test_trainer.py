@@ -1,5 +1,5 @@
 import json
-import model
+import model_data
 
 log_filename = 'working_scrips/log.json'
 
