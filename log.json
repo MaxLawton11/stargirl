@@ -1,6 +1,4 @@
 {
   "model_filename": "model.h5",
-  "epochs": 20,
-  "max_sequence_length": 20,
-  "batch_size": 64
+  "epochs": 20
 }
