@@ -6,6 +6,7 @@ from model_data import Model
 log = json.load(open('log.json'))
 
 chatbot = Model(
+    # make a way to make sure this is always the same
     argparse.Namespace(\
         save_model=log['model_filename'], # path save the model
         max_samples=25000, # maximum number of conversation pairs to use
