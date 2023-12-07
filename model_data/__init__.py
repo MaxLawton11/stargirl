@@ -36,5 +36,5 @@ class Model():
         
     def evaluate(self) :
         chatbot = self._loadModel()
-        evaluation_functions.evaluate(self.hparams, chatbot, self.tokenizer)
+        return evaluation_functions.evaluate(self.hparams, chatbot, self.tokenizer)
         
