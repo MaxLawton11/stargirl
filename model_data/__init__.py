@@ -1,8 +1,8 @@
 import argparse
 import tensorflow as tf
 
-from model_data import model
-from model_data.dataset import get_dataset, preprocess_sentence
+from model_data.transformer import model
+from model_data.transformer.dataset import get_dataset, preprocess_sentence
 
 from model_data import evaluation_functions
 
