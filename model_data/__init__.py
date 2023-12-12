@@ -18,9 +18,7 @@ class Model():
             custom_objects={
                 "PositionalEncoding": model.PositionalEncoding,
                 "MultiHeadAttentionLayer": model.MultiHeadAttentionLayer,
-            },
-            compile=False,
-        )
+            }, compile=False, )
         return chatbot
         
     def createModel(self) :
