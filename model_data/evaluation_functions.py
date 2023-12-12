@@ -1,7 +1,7 @@
 import argparse
 import tensorflow as tf
-from transformer import model
-from transformer.dataset import get_dataset, preprocess_sentence
+from model_data.transformer import model
+from model_data.transformer.dataset import get_dataset, preprocess_sentence
 
 def inference(hparams, chatbot, tokenizer, sentence):
     sentence = preprocess_sentence(sentence)
