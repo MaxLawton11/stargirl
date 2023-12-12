@@ -20,6 +20,9 @@ class Model():
                 "MultiHeadAttentionLayer": model.MultiHeadAttentionLayer,
             }, compile=False, )
         return chatbot
+
+    def _testVaildModel(self) :
+        pass
         
     def createModel(self) :
         pass
