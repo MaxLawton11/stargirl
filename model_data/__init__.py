@@ -23,6 +23,8 @@ class Model():
         )
         return chatbot
         
+    def createModel(self) :
+        pass
         
     def train(self, epochs) :
         chatbot = self._loadModel()
