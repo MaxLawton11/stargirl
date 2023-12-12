@@ -22,5 +22,4 @@ chatbot = Model(
         )
 )
 
-response = chatbot.evaluate()
-print(response)
+chatbot.train(2)
