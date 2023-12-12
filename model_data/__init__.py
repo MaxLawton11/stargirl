@@ -4,7 +4,7 @@ import tensorflow as tf
 from model_data import model
 from model_data.dataset import get_dataset, preprocess_sentence
 
-import evaluation_functions
+from model_data.import evaluation_functions
 
 class Model():
     def __init__(self, hparams):
