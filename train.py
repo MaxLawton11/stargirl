@@ -136,7 +136,7 @@ if __name__ == "__main__":
         num_heads=8, 
         dropout=0.1, 
         activation='relu', 
-        epochs=20
+        epochs=2
         )
     
     main(args)
