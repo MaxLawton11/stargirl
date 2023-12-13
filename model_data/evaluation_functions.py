@@ -46,6 +46,7 @@ def evaluate(hparams, chatbot, tokenizer):
     print(f"\ninput: {sentence}\noutput: {output}")
 
     sentence = "I am not crazy, my mother had me tested"
+    
     for _ in range(5):
         output = predict(hparams, chatbot, tokenizer, sentence)
         print(f"\ninput: {sentence}\noutput: {output}")
