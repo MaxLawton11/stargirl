@@ -1,5 +1,4 @@
 import argparse
-from msilib.schema import Error
 import tensorflow as tf
 import os.path
 
