@@ -1,5 +1,6 @@
 # don't use
 # should be deleted
+# but after im done
 
 import argparse
 import tensorflow as tf
