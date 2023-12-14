@@ -1,5 +1,7 @@
 import argparse
+from msilib.schema import Error
 import tensorflow as tf
+import os.path
 
 from model_data.transformer import model
 from model_data.transformer.dataset import get_dataset, preprocess_sentence
@@ -11,18 +13,23 @@ class Model():
         self.hparams = hparams
         self.dataset, self.tokenizer = get_dataset(hparams)
         
-    def _loadModel(self) :
-        tf.keras.backend.clear_session()
-        chatbot = tf.keras.models.load_model(
-            self.hparams.save_model,
-            custom_objects={
-                "PositionalEncoding": model.PositionalEncoding,
-                "MultiHeadAttentionLayer": model.MultiHeadAttentionLayer,
-            }, compile=False, )
-        return chatbot
-
+        
     def _testVaildModel(self) :
-        pass
+        return os.path.isfile(self.hparams.save_model)
+    
+    def _loadModel(self) :
+        if self._testVaildModel() :
+            tf.keras.backend.clear_session()
+            chatbot = tf.keras.models.load_model(
+                self.hparams.save_model,
+                custom_objects={
+                    "PositionalEncoding": model.PositionalEncoding,
+                    "MultiHeadAttentionLayer": model.MultiHeadAttentionLayer,
+                }, compile=False, )
+            return chatbot
+        else :
+            raise Exception("No vaild model!")
+
         
     def createModel(self) :
         pass
