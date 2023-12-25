@@ -28,7 +28,6 @@ class Model():
             return chatbot
         else :
             raise Exception("No vaild model!")
-
         
     def createModel(self) :
         pass
